@@ -1,5 +1,6 @@
-from element import BasePageElement
-from locators import LoginPageLocators
+from element import *
+from locators import LoginPageLocators, StatisticsPageLocators
+from selenium.webdriver.support.ui import Select
 #from locators import MainPageLocators
 
 
@@ -10,20 +11,6 @@ class BasePage(object):
         self.driver = driver
 
 
-class UsernameElement(BasePageElement):
-    """ Esta clase obtiene el usuario del localizador especificado. """
-
-    # Localizador para el input de usuario donde se ingresa el nombre de usuario
-    locator = 'username'
-
-
-class PasswordElement(BasePageElement):
-    """ Esta clase obtiene la contraseña del localizador especifico. """
-
-    # Localizador para el input de la contraseña donde se ingresa la contraseña del usuario
-    locator = 'password'
-
-
 class LoginPage(BasePage):
     """Login page. """
 
@@ -32,4 +19,23 @@ class LoginPage(BasePage):
 
     def click_login_button(self):
         element = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
+        element.click()
+
+
+class StatisticsPage(BasePage):
+    """Pagina de estadísticas curso. """
+
+    menu_report_element = MenuReportElement()
+    menu_time_element = MenuTimeElement()
+
+
+    def select_time_report(self, value):
+        element = self.driver.find_element(
+            *StatisticsPageLocators.TIME_SELECT)
+        element = Select(element)
+        element.select_by_value(value)
+
+    def click_vista_button(self):
+        element = self.driver.find_element(
+            *StatisticsPageLocators.VISTA_BUTTON)
         element.click()
