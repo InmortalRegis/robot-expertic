@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 import page
 from spreadsheet import SpreadSheet
+import time
 
 
 class TestCase(unittest.TestCase):
@@ -10,12 +11,16 @@ class TestCase(unittest.TestCase):
     Arguments:
         unittest {library} -- Python unittesting framework
     """
-    link_list = SpreadSheet(sheet='Creación de cursos 2018-1',
-                            worksheet='Cursos Bucaramanga', values_list='BE3:BE5').get_link_list()
+    link_list = SpreadSheet(sheet='Creación de cursos 2018-2',
+                            worksheet='Cursos 2018-2', values_list='AU3:AU276').get_link_list()
 
     def setUp(self):
-        self.driver = webdriver.Firefox()
-        self.driver.get("http://tic.uis.edu.co/ava25/")
+        chrome_options = webdriver.ChromeOptions()
+        
+        prefs = {'download.default_directory' : 'G:\\Mi unidad\\1_ExperTIC\\03_Ejecucion\\2019\\02_ProcesosPrimarios\\07_TrabajoconAuxiliares\\Descarga de Notas\\2018-2'}
+        chrome_options.add_experimental_option('prefs', prefs)
+        self.driver = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=chrome_options)
+        self.driver.get("http://tic.uis.edu.co/")
 
     def test_log_in_experticava25(self):
         """
@@ -24,17 +29,23 @@ class TestCase(unittest.TestCase):
         """
         # Log in
         login_page = page.LoginPage(self.driver)
+        self.driver.find_element_by_id("posgrado-head").click()
         login_page.username_element = 'exper-tic'
-        login_page.password_element = '123581mapa'
+        login_page.password_element = 'exper-tic'
         login_page.click_login_button()
-
-    def test_select_report(self):
         # Select report
-        self.driver.get(url)
-        statistics_page = page.StatisticsPage(self.driver)
-        statistics_page.menu_report_element = '55'
-        statistics_page.menu_time_element = '16'
-        statistics_page.click_vista_button()
+        for link in self.link_list:
+            print(link)
+            if(link==''):
+                pass
+            else:
+                self.driver.get(link)
+                self.driver.find_element_by_id("id_submitbutton").click()
+                time.sleep(5)
+                pass
+    
+
+        
 
     def tearDown(self):
         self.driver.close()
