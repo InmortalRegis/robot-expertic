@@ -2,7 +2,7 @@ import unittest
 from selenium import webdriver
 import page
 from spreadsheet import SpreadSheet
-
+import time
 
 class TestCase(unittest.TestCase):
     """ Clase para probar objectos de página.
@@ -28,13 +28,14 @@ class TestCase(unittest.TestCase):
         login_page.password_element = '123581mapa'
         login_page.click_login_button()
 
-    def test_select_report(self):
+       
         # Select report
-        self.driver.get(url)
+        self.driver.get(self.link_list[0])
         statistics_page = page.StatisticsPage(self.driver)
         statistics_page.menu_report_element = '55'
         statistics_page.menu_time_element = '16'
         statistics_page.click_vista_button()
+        
 
     def tearDown(self):
         self.driver.close()
