@@ -10,8 +10,8 @@ class TestCase(unittest.TestCase):
     Arguments:
         unittest {library} -- Python unittesting framework
     """
-    link_list = SpreadSheet(sheet='Creación de cursos 2018-1',
-                            worksheet='Cursos Bucaramanga', values_list='AG3:AG188').get_link_list()
+    link_list = SpreadSheet(sheet='Creación de cursos 2018-2',
+                            worksheet='Cursos Sedes', values_list='AG3:AG188').get_link_list()
 
     def setUp(self):
         #chrome_options = webdriver.ChromeOptions()
@@ -21,12 +21,7 @@ class TestCase(unittest.TestCase):
         #self.driver = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=chrome_options)
         self.driver = webdriver.Firefox()
         self.driver.get("http://tic.uis.edu.co/ava25")
-
-    def test_log_in_experticava25(self):
-        """ 
-         Test login experticava25. Ingresa a la plataforma con las credenciales especificas
-            :param self:
-        """
+        
         # Log in
         login_page = page.LoginPage(self.driver)
         #login_page.click_posgrado_button()
@@ -34,6 +29,10 @@ class TestCase(unittest.TestCase):
         #login_page.password_element = 'exper-tic'
         login_page.password_element = '123581mapa'
         login_page.click_login_button_ava25()
+
+    def test_export_excel(self):
+        
+        
         # Select report
         for link in self.link_list:
             print(link)

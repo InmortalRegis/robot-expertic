@@ -20,6 +20,9 @@ class StatisticsPageLocators(object):
 class ExportXlsPageLocators(object):
     """ Todos los localizadores de la página Statistics van aquí. """
 
-    DESCARGAR_BUTTON = (By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Exportar'])[2]/following::input[1]")
+    DESCARGAR_BUTTON = (
+    By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Exportar'])[2]/following::input[1]")
+
+
+class ReportPageLocators(object):
     ENVIAR_BUTTON = (By.ID, 'id_submitbutton')
-    

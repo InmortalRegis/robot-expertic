@@ -1,7 +1,9 @@
 from element import *
-from locators import LoginPageLocators, StatisticsPageLocators, ExportXlsPageLocators
+from locators import LoginPageLocators, StatisticsPageLocators, ExportXlsPageLocators, ReportPageLocators
 from selenium.webdriver.support.ui import Select
-#from locators import MainPageLocators
+
+
+# from locators import MainPageLocators
 
 
 class BasePage(object):
@@ -20,15 +22,14 @@ class LoginPage(BasePage):
     def click_posgrado_button(self):
         element = self.driver.find_element(*LoginPageLocators.POSGRADO_BUTTON)
         element.click()
-    
+
     def click_login_button(self):
         element = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         element.click()
-    
+
     def click_login_button_ava25(self):
         element = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON_AVA25)
         element.click()
-    
 
 
 class StatisticsPage(BasePage):
@@ -36,7 +37,6 @@ class StatisticsPage(BasePage):
 
     menu_report_element = MenuReportElement()
     menu_time_element = MenuTimeElement()
-
 
     def select_time_report(self, value):
         element = self.driver.find_element(
@@ -49,17 +49,25 @@ class StatisticsPage(BasePage):
             *StatisticsPageLocators.VISTA_BUTTON)
         element.click()
 
-class ExportXlsPage(BasePage):
-    """Pagina de exportar califaciones a excel"""
+class ReportPage(BasePage):
 
     def click_enviar_button(self):
         element = self.driver.find_element(
-            *ExportXlsPageLocators.ENVIAR_BUTTON)
-        
+            *ReportPageLocators.ENVIAR_BUTTON)
+
         element.click()
+
+class ExportXlsPage(ReportPage):
+    """Pagina de exportar califaciones a excel"""
+
 
     def click_descargar_button(self):
         element = self.driver.find_element(
             *ExportXlsPageLocators.DESCARGAR_BUTTON)
-        element.click() 
+        element.click()
+
+
+class HistoryScorePage(ReportPage):
+    pass
+
 
