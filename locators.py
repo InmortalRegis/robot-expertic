@@ -20,9 +20,13 @@ class StatisticsPageLocators(object):
 class ExportXlsPageLocators(object):
     """ Todos los localizadores de la página Statistics van aquí. """
 
-    DESCARGAR_BUTTON = (
-    By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Exportar'])[2]/following::input[1]")
+    DOWNLOAD_BUTTON = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Exportar'])[2]/following::input[1]")
 
 
 class ReportPageLocators(object):
-    ENVIAR_BUTTON = (By.ID, 'id_submitbutton')
+    SEND_BUTTON = (By.ID, 'id_submitbutton')
+
+
+class HistoryScorePageLocators(object):
+    DOWNLOAD_BUTTON = (By.ID, "yui_3_17_2_1_1552772291427_388")

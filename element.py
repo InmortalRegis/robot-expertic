@@ -48,10 +48,10 @@ class BaseSelectElement(BasePageElement):
 
 
 class MenuReportElement(BaseSelectElement):
-
     locator = 'menureport'
 
 
 class MenuTimeElement(BaseSelectElement):
-
     locator = 'menutime'
+
+

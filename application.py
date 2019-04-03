@@ -1,8 +1,8 @@
 from selenium import webdriver
 import page
 from spreadsheet import SpreadSheet
-from bs4 import BeautifulSoup
 import time
+
 
 class Main():
     """ Clase para crear objectos de página.
@@ -32,32 +32,17 @@ class Main():
         login_page.click_login_button()
 
     def get_history_score(self, url):
-
         self.driver.get(url)
         history_score_page = page.HistoryScorePage(self.driver)
         history_score_page.click_enviar_button()
-        time.sleep(3)
-        html = self.driver.page_source
-        soup = BeautifulSoup(html, 'html.parser')
-        table = soup.find('table', attrs={"class": "gradereport_history"})
-        headers = [header.text for header in table.find_all('th')]
+        time.sleep(5)
+        history_score_page.click_download_button()
 
-        rows = []
-        for row in table.find_all('tr'):
-            rows.append([val.text for val in row.find_all('td')])
-
-            pass
-        print(rows)
-
-
-
-        for tag in soup.find_all('title'):
-            print(tag.text)
-            pass
+        time.sleep(5)
 
     def select_report(self, url):
         """ Selecciona reporte por cursos en este caso tipo de reporte estudiantes y
-        período a mostrar de 6 meses 
+        período a mostrar de 6 meses
 
         Arguments:
             url {string} -- [url para cada página reporte]
@@ -68,7 +53,7 @@ class Main():
         statistics_page = page.StatisticsPage(self.driver)
         # Menu report 53 Profesor, 55 Estudiante
         statistics_page.menu_report_element = '55'
-        # Page menu 16: 6 mounths
+        # Page menu 16: 6 months
         statistics_page.menu_time_element = '16'
         statistics_page.click_vista_button()
 

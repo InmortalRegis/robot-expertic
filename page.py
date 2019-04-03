@@ -1,5 +1,6 @@
 from element import *
-from locators import LoginPageLocators, StatisticsPageLocators, ExportXlsPageLocators, ReportPageLocators
+from locators import LoginPageLocators, StatisticsPageLocators, ExportXlsPageLocators, ReportPageLocators, \
+    HistoryScorePageLocators
 from selenium.webdriver.support.ui import Select
 
 
@@ -49,25 +50,27 @@ class StatisticsPage(BasePage):
             *StatisticsPageLocators.VISTA_BUTTON)
         element.click()
 
+
 class ReportPage(BasePage):
 
     def click_enviar_button(self):
         element = self.driver.find_element(
-            *ReportPageLocators.ENVIAR_BUTTON)
+            *ReportPageLocators.SEND_BUTTON)
 
         element.click()
+
 
 class ExportXlsPage(ReportPage):
     """Pagina de exportar califaciones a excel"""
 
-
-    def click_descargar_button(self):
+    def click_download_button(self):
         element = self.driver.find_element(
-            *ExportXlsPageLocators.DESCARGAR_BUTTON)
+            *ExportXlsPageLocators.DOWNLOAD_BUTTON)
         element.click()
 
 
 class HistoryScorePage(ReportPage):
-    pass
 
-
+    def click_download_button(self):
+        element = self.driver.find_element(*HistoryScorePageLocators.DOWNLOAD_BUTTON)
+        element.click()
